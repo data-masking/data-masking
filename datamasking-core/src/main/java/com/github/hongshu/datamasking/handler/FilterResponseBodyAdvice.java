@@ -97,12 +97,24 @@ public class FilterResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return convertRList((List) body, dataMasking);
         }
         Class clazz = body.getClass();
-        List<BeanPropertyDefinition> beanDescList = getBeanDesc(clazz);
-        Annotation clazzAnnotation = clazz.getAnnotation(DataMasking.class);
+
+        DataMasking clazzAnnotation = (DataMasking) clazz.getAnnotation(DataMasking.class);
         DataMasking clazzDataMasking = dataMasking;
         if (ObjectUtils.isNotEmpty(clazzAnnotation)) {
-            clazzDataMasking = (DataMasking) clazzAnnotation;
+            clazzDataMasking = clazzAnnotation;
+            /*当注解仅作用在类上，在enable=false时，代表整体不需要脱敏，交给业务层行实现*/
+            if (ObjectUtils.isEmpty(dataMasking) && !clazzAnnotation.enabled()) {
+                return body;
+            }
         }
+
+        List<BeanPropertyDefinition> beanDescList = getBeanDesc(clazz);
+//        DataMaskingKnife dataMaskingKnife = (DataMaskingKnife)clazz.getAnnotation(DataMaskingKnife.class);
+//        Boolean handlerDataMaskingKnife = DataMaskingKnifeHandler.postDataMaskingKnife(body,dataMaskingKnife,beanDescList);
+//        if (handlerDataMaskingKnife){
+//            return body;
+//        }
+
         JSONObject meta = new JSONObject();
         for (BeanPropertyDefinition beanDesc : beanDescList) {
             dataMasking = getDataMasking(beanDesc, clazzDataMasking);
