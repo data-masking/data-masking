@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.github.hongshu</groupId>
+        <groupId>io.github.data-masking</groupId>
         <artifactId>datamasking</artifactId>
         <version>${base.version}</version>
     </parent>
     <artifactId>datamasking-core</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.github.hongshu</groupId>
+            <groupId>io.github.data-masking</groupId>
             <artifactId>datamasking-spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>

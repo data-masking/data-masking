@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.hongshu</groupId>
+    <groupId>io.github.data-masking</groupId>
     <artifactId>datamasking</artifactId>
     <version>${base.version}</version>
     <packaging>pom</packaging>
@@ -56,12 +56,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.hongshu</groupId>
+                <groupId>io.github.data-masking</groupId>
                 <artifactId>datamasking-spring-boot-autoconfigure</artifactId>
                 <version>${version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.hongshu</groupId>
+                <groupId>io.github.data-masking</groupId>
                 <artifactId>datamasking-core</artifactId>
                 <version>${version}</version>
             </dependency>
@@ -134,6 +134,17 @@
         </pluginManagement>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.7</version>
@@ -152,9 +163,9 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -175,23 +186,8 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <!--<configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                        </configuration>-->
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
