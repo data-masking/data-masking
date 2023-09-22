@@ -18,7 +18,6 @@ public @interface DataMasking {
      * desc  脱敏开关，可以控制类、变量
      * 2023/8/11 9:19
      */
-
     boolean enabled() default true;
 
 
@@ -35,15 +34,14 @@ public @interface DataMasking {
 
     /**
      * 被替换的字符
-     * 字符串长度为1时，等量替换，如： abcedfg -> a******
-     * 长度大于1时，非等量替换字字符串，如： masking=**  结果 abcedfg -> a**
+     * 字符串长度为1时，等量替换，如： abcedfg : a******
+     * 长度大于1时，非等量替换字字符串，如： masking=**  结果 abcedfg : a**
      */
     String masking() default "*";
 
     /**
      * 数据脱敏策略，默认直接替换
      *
-     * @return
      */
     DesensitizedUtil.DesensitizedType strategy() default DesensitizedUtil.DesensitizedType.FIRST_MASK;
 
