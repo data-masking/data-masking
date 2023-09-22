@@ -15,7 +15,7 @@
 
 #### 💪支持作者
 
-<img src="docs/images/wx_pay.jpg" alt="wx" style="zoom:20%;" width="384em" height="531em" />
+<img src="docs/images/wx_pay.jpg" alt="wx" style="zoom:20%;" width="128em" height="177em" />
 
 ✔☜☝☜☝☞☄♨☎
 
